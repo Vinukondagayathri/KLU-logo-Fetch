@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLU Logo Fetch</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            margin-top: 50px;
+            padding: 30px;
+        }
+
+        img {
+            width: 250px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>KL University</h1>
+
+        <button onclick="fetchLogo()">Fetch KLU Logo</button>
+
+        <div id="logoContainer"></div>
+    </div>
+
+    <script>
+        async function fetchLogo() {
+            try {
+                const response = await fetch("db.json");
+                const data = await response.json();
+
+                document.getElementById("logoContainer").innerHTML = `
+                    <h2>${data.university.name}</h2>
+                    <img src="${data.university.logo}" alt="KL University Logo">
+                `;
+            } 
+            catch (error) {
+                console.log("Error:", error);
+                alert("Unable to fetch logo");
+            }
+        }
+    </script>
+
+</body>
+</html>
